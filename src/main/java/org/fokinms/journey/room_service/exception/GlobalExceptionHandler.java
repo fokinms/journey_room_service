@@ -15,8 +15,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RoomNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleNoSuchElementException(NoSuchElementException e) {
+    public ErrorResponse handleRoomNotFoundException(NoSuchElementException e) {
         log.error("Room not found exception: ", e);
+        return new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage());
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleOrderNotFoundException(NoSuchElementException e) {
+        log.error("Order not found exception: ", e);
         return new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage());
     }
 

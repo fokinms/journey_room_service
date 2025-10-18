@@ -1,3 +1,7 @@
 databaseChangeLog:
   - include:
       file: db/changelog/changeset/rooms_V001__initial.sql
+  - include:
+      file: db/changelog/changeset/rooms_V002__table_orders.sql
+  - include:
+      file: db/changelog/changeset/rooms_V003__table_rooms_added_status_and_orderid.sql

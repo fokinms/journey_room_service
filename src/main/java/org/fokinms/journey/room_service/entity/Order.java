@@ -20,31 +20,33 @@ import java.time.LocalDateTime;
 
 @Getter
 @Entity
-@Table(name = "rooms")
-public class Room {
+@Table(name = "orders")
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "apartment_name", length = 64, nullable = false)
-    private String apartmentName;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 
-    @Column(name = "city", length = 64, nullable = false)
-    private String city;
+    @Column(name = "room_id", nullable = false)
+    private Long roomId;
 
-    @Column(name = "number_of_rooms", nullable = false)
-    private byte numberOfRooms;
-
-    @Column(name = "price", nullable = false)
-    private BigDecimal price;
-
-    @Column(name = "room_status", length = 16, nullable = false)
+    @Column(name = "order_status", length = 16, nullable = false)
     @Enumerated(EnumType.STRING)
-    private RoomStatus roomStatus;
+    private OrderStatus orderStatus;
 
-    @Column(name = "order_id")
-    private Long orderId;
+    @Column(name = "order_price", nullable = false)
+    private BigDecimal orderPrice;
+
+    @Column(name = "order_start_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime orderStartDate;
+
+    @Column(name = "order_end_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime orderEndDate;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -57,9 +59,9 @@ public class Room {
     private LocalDateTime updatedAt;
 
     @PrePersist
-    public void setRoomStatus() {
-        if (roomStatus == null) {
-            roomStatus = RoomStatus.FREE;
+    public void setDefaultStatus() {
+        if (orderStatus == null) {
+            orderStatus = OrderStatus.NEW;
         }
     }
 }
