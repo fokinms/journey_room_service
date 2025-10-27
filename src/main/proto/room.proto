@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+option java_package = "org.fokinms.journey.room_service";
+option java_multiple_files = true;
+
+service RoomService {
+  rpc CreateRoom(CreateRoomRequest) returns (RoomResponse);
+  rpc GetRoom(GetRoomRequest) returns (RoomResponse);
+  rpc UpdateRoom(UpdateRoomRequest) returns (RoomResponse);
+  rpc DeleteRoom(DeleteRoomRequest) returns (DeleteRoomResponse);
+}
+
+message CreateRoomRequest {
+  string apartmentName = 1;
+  string city = 2;
+  int32 numberOfRooms = 3;
+  string price = 4;
+  optional RoomStatus roomStatus = 5;
+}
+
+message GetRoomRequest {
+  int64 id = 1;
+}
+
+message UpdateRoomRequest {
+  int64 id = 1;
+  optional string apartmentName = 2;
+  optional string city = 3;
+  optional int32 numberOfRooms = 4;
+  optional string price = 5;
+  optional RoomStatus roomStatus = 6;
+  optional int64 orderId = 7;
+}
+
+message DeleteRoomRequest {
+  int64 id = 1;
+}
+
+message RoomResponse {
+  int64 id = 1;
+  string apartmentName = 2;
+  string city = 3;
+  int32 numberOfRooms = 4;
+  string price = 5;
+  RoomStatus roomStatus = 6;
+  int64 orderId = 7;
+}
+
+message DeleteRoomResponse {
+  bool success = 1;
+}
+
+enum RoomStatus {
+    ROOM_UNSPECIFIED = 0;
+    FREE = 1;
+    BOOKED = 2;
+    TEMPORARILY_UNAVAILABLE = 3;
+}

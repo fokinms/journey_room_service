@@ -11,7 +11,10 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -20,7 +23,10 @@ import java.time.LocalDateTime;
 
 @Getter
 @Entity
+@Builder
 @Table(name = "rooms")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Room {
 
     @Id

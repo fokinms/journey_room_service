@@ -16,6 +16,6 @@ public class OrderService {
 
     public OrderDto findOrderById(Long orderId) {
         return orderMapper.toDto(orderRepository.findById(orderId)
-                .orElseThrow(() -> new OrderNotFoundException(String.format("Room not found with id: %d", orderId))));
+                .orElseThrow(() -> new OrderNotFoundException(String.format("Order not found with id: %d", orderId))));
     }
 }
