@@ -24,6 +24,12 @@ services:
       - room-postgresql
     networks:
       - room-service-network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      interval: 5s
+      timeout: 2s
+      retries: 3
+      start_period: 10s
 
   room-postgresql:
     image: postgres:${POSTGRES_VERSION}
@@ -44,7 +50,7 @@ services:
       - postgresql_data:/var/lib/postgresql/data
       - ./postgres/scripts:/docker-entrypoint-initdb.d
     healthcheck:
-      test: "pg_isready -U postgres_user -d rooms"
+      test: "pg_isready -U ${SPRING_DATASOURCE_USERNAME} -d ${SPRING_DATASOURCE_DB}"
       interval: 2s
       timeout: 20s
       start_period: 10s
